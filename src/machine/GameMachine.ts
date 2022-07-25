@@ -1,4 +1,4 @@
-import { createMachine, interpret, InterpreterFrom } from "xstate";
+import { interpret, InterpreterFrom } from "xstate";
 import { createModel } from "xstate/lib/model";
 import {
   GameContext,
@@ -61,7 +61,7 @@ export const GameModel = createModel(
   }
 );
 
-export const GameMachine = createMachine({
+export const GameMachine = GameModel.createMachine({
   id: "game",
   context: GameModel.initialContext,
   initial: GameStates.LOBBY,
