@@ -29,6 +29,31 @@ describe("machine/GameMachine", () => {
     });
   });
 
+  describe("leave", () => {
+    let machine: InterpreterFrom<typeof GameMachine>;
+
+    beforeEach(() => {
+      machine = makeGame(GameStates.LOBBY, {
+        players: [
+          { id: "1", name: "1" },
+          { id: "2", name: "2" },
+        ],
+      });
+    });
+
+    it("should let me leave", () => {
+      expect(machine.send(GameModel.events.leave("1")).changed).toBe(true);
+      expect(machine.state.context.players).toHaveLength(1);
+      expect(machine.send(GameModel.events.leave("2")).changed).toBe(true);
+      expect(machine.state.context.players).toHaveLength(0);
+    });
+
+    it("should let me only if i'm in lobby", () => {
+      expect(machine.send(GameModel.events.leave("1")).changed).toBe(true);
+      expect(machine.send(GameModel.events.leave("1")).changed).toBe(false);
+    });
+  });
+
   describe("dropToken", () => {
     let machine: InterpreterFrom<typeof GameMachine>;
 
