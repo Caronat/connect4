@@ -1,0 +1,169 @@
+html,
+body {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+label {
+  font: inherit;
+}
+
+input {
+  font: inherit;
+  padding: 0.7rem 1rem;
+  line-height: 1;
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+}
+input:disabled {
+  opacity: 0.4;
+}
+
+.alert {
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #842029;
+  background-color: #f8d7da;
+  border: 1px solid #842029;
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.players {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.disc {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.disc-yellow {
+  background-color: #f6db38;
+  box-shadow: inset 0 0 0 3px #ac9619;
+  border: 3px solid #f6db38;
+  outline: 1px solid #ac9619;
+}
+
+.disc-red {
+  background-color: #f63838;
+  box-shadow: inset 0 0 0 3px #ac1919;
+  border: 3px solid #f63838;
+  outline: 1px solid #ac1919;
+}
+
+.selector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selector .disc {
+  margin: 10px;
+  transform: scale(2);
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  aspect-ratio: var(--cols) / var(--rows);
+  background: radial-gradient(
+    circle,
+    transparent,
+    transparent 50%,
+    #336dac 51%,
+    #336dac 60%,
+    #154170 80%
+  );
+  background-size: calc(100% / var(--cols)) calc(100% / var(--rows));
+  border: 15px solid #154170;
+  place-items: center;
+  place-content: center;
+  margin-top: calc(100% / var(--rows));
+}
+
+.grid .disc {
+  width: 80%;
+  height: auto;
+  aspect-ratio: 1/1;
+  animation: Drop calc(0.25s * var(--row)) both;
+}
+
+@keyframes Drop {
+  from {
+    transform: translateY(calc(-125% * var(--row)));
+  }
+}
+
+.columns {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: calc(100% + 100% / var(--rows));
+}
+
+.column .disc {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: 0.3s;
+}
+.column:hover .disc {
+  opacity: 1;
+  transform: translateY(10px);
+}
+
+.button {
+  background: #336dac;
+  color: #fff;
+  font: inherit;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  line-height: 1;
+  transition: 0.2s;
+  box-shadow: 2px 2px 2px gray;
+}
+.button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
