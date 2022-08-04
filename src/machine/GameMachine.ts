@@ -63,7 +63,9 @@ export const GameModel = createModel(
 
 export const GameMachine = GameModel.createMachine({
   id: "game",
-  context: GameModel.initialContext,
+  context: {
+    ...GameModel.initialContext,
+  },
   initial: GameStates.LOBBY,
   states: {
     [GameStates.LOBBY]: {

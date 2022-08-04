@@ -6,12 +6,13 @@ type CellProps = {
   x: number;
   y: number;
   color: CellState;
+  active: boolean;
 };
 
-const Cell = ({ x, y, color }: CellProps) => {
+const Cell = ({ x, y, color, active }: CellProps) => {
   return (
     <div
-      className={discColorClass(color)}
+      className={discColorClass(color) + (active ? " disc-active" : "")}
       style={{ "--row": y } as CSSProperties}
     />
   );

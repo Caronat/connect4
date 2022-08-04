@@ -15,7 +15,7 @@ export const chooseColorAction: GameAction<"chooseColor"> = (
   event
 ) => ({
   players: context.players.map((p) => {
-    if (p.id === event.playerId) p.color === event.color;
+    if (p.id === event.playerId) return { ...p, color: event.color };
     return p;
   }),
 });

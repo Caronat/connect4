@@ -2,7 +2,7 @@ import { discColorClass } from "../../func/color";
 import { Player, PlayerColor } from "../../types";
 
 type ColorSelectorProps = {
-  onSelect: (color: PlayerColor, players: Player[]) => void;
+  onSelect: (color: PlayerColor) => void;
   players: Player[];
   colors: PlayerColor[];
 };
@@ -22,7 +22,9 @@ const ColorSelector = ({ onSelect, players, colors }: ColorSelectorProps) => {
       <div className="selector">
         {colors.map((color) => {
           return (
-            <button className={discColorClass(color)} key={color}></button>
+            <button key={color} onClick={() => onSelect(color)}>
+              <div className={discColorClass(color)}></div>
+            </button>
           );
         })}
       </div>

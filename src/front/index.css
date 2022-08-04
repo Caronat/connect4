@@ -15,6 +15,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  opacity: 0.3;
+}
+
 label {
   font: inherit;
 }
@@ -119,7 +123,33 @@ input:disabled {
   width: 80%;
   height: auto;
   aspect-ratio: 1/1;
+}
+
+.grid .disc-red,
+.grid .disc-yellow {
   animation: Drop calc(0.25s * var(--row)) both;
+}
+.grid .disc-active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
 }
 
 @keyframes Drop {
@@ -164,6 +194,9 @@ input:disabled {
   box-shadow: 2px 2px 2px gray;
 }
 .button:hover {
+  background: #184370;
+}
+.button:active {
   transform: translate(2px, 2px);
   box-shadow: none;
 }

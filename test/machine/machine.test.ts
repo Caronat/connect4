@@ -5,7 +5,7 @@ import {
   GameModel,
   makeGame,
 } from "../../src/machine/GameMachine";
-import { GameContext, GameStates, PlayerColor } from "../../src/types";
+import { GameStates, PlayerColor } from "../../src/types";
 
 describe("machine/GameMachine", () => {
   describe("join", () => {
@@ -48,9 +48,47 @@ describe("machine/GameMachine", () => {
       expect(machine.state.context.players).toHaveLength(0);
     });
 
-    it("should let me only if i'm in lobby", () => {
+    it("should let me leave only if i'm in lobby", () => {
       expect(machine.send(GameModel.events.leave("1")).changed).toBe(true);
       expect(machine.send(GameModel.events.leave("1")).changed).toBe(false);
+    });
+  });
+
+  describe("chooseColor", () => {
+    let machine: InterpreterFrom<typeof GameMachine>;
+
+    beforeEach(() => {
+      machine = makeGame(GameStates.LOBBY, {
+        players: [
+          { id: "1", name: "1" },
+          { id: "2", name: "2" },
+        ],
+      });
+    });
+
+    it("should let me choose color", () => {
+      expect(
+        machine.send(GameModel.events.chooseColor("1", PlayerColor.RED)).changed
+      ).toBe(true);
+      expect(
+        machine.send(GameModel.events.chooseColor("2", PlayerColor.YELLOW))
+          .changed
+      ).toBe(true);
+    });
+
+    it("should not let me choose same color", () => {
+      expect(
+        machine.send(GameModel.events.chooseColor("1", PlayerColor.RED)).changed
+      ).toBe(true);
+      expect(
+        machine.send(GameModel.events.chooseColor("2", PlayerColor.RED)).changed
+      ).toBe(false);
+    });
+
+    it("should let me choose color only if i'm in lobby", () => {
+      expect(
+        machine.send(GameModel.events.chooseColor("4", PlayerColor.RED)).changed
+      ).toBe(false);
     });
   });
 
