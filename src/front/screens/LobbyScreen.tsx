@@ -24,7 +24,6 @@ const LobbyScreen = (props: LobbyScreenProps) => {
 
   return (
     <div>
-      <NameSelector onSelect={joinGame} />
       <ColorSelector
         onSelect={chooseColor}
         colors={colors}

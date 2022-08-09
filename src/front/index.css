@@ -110,7 +110,7 @@ input:disabled {
     transparent 50%,
     #336dac 51%,
     #336dac 60%,
-    #154170 80%
+    #154170 70%
   );
   background-size: calc(100% / var(--cols)) calc(100% / var(--rows));
   border: 15px solid #154170;
