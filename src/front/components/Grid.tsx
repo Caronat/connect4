@@ -7,11 +7,12 @@ import Column from "./Column";
 type GridProps = {
   grid: GridState;
   color?: PlayerColor;
-  onDrop?: (x: number) => void;
+  onDrop: (x: number) => void;
   winingPositions: Position[];
+  canDrop: (x: number) => boolean;
 };
 
-const Grid = ({ grid, color, onDrop, winingPositions }: GridProps) => {
+const Grid = ({ grid, color, onDrop, winingPositions, canDrop }: GridProps) => {
   const cols = grid[0].length;
   const showColumns = color && onDrop;
   const isWining = (x: number, y: number) =>
@@ -38,7 +39,13 @@ const Grid = ({ grid, color, onDrop, winingPositions }: GridProps) => {
       {showColumns && (
         <div className="columns">
           {new Array(cols).fill(1).map((_, i) => (
-            <Column onDrop={() => onDrop(i)} color={color} key={i} />
+            <Column
+              x={i}
+              onDrop={onDrop}
+              color={color}
+              key={i}
+              disabled={!canDrop(i)}
+            />
           ))}
         </div>
       )}

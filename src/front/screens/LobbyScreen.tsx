@@ -10,14 +10,8 @@ const LobbyScreen = (props: LobbyScreenProps) => {
   const { context, send, can, state } = useGame();
   const colors = [PlayerColor.YELLOW, PlayerColor.RED];
 
-  const joinGame = (name: string) =>
-    send({ type: "join", name, playerId: name });
   const chooseColor = (color: PlayerColor) =>
-    send({
-      type: "chooseColor",
-      color,
-      playerId: color === PlayerColor.YELLOW ? "John" : "Marc",
-    });
+    send({ type: "chooseColor", color });
   const startGame = () => send({ type: "start" });
 
   const canStart = can({ type: "start" });

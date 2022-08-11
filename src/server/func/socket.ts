@@ -1,7 +1,7 @@
-import { SocketStream } from "@fastify/websocket";
 import { InterpreterFrom } from "xstate";
 import { GameMachine } from "../../machine/GameMachine";
 import { ConnectionRepository } from "../repositories/ConnectionRepository";
+import { SocketStream } from "@fastify/websocket";
 
 export const publishMachineToPlayers = (
   machine: InterpreterFrom<typeof GameMachine>["state"],
@@ -10,7 +10,6 @@ export const publishMachineToPlayers = (
 ) => {
   for (const player of machine.context.players) {
     const connection = connections.find(player.id, gameId);
-
     if (connection) {
       publishMachine(machine, connection);
     }

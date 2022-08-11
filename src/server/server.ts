@@ -2,20 +2,20 @@ import Fastify from "fastify";
 import FastifyStatic from "@fastify/static";
 import FastifyWebsocket from "@fastify/websocket";
 import { sign, verify } from "./func/crypto";
-import { uid } from "./func/uid";
-import path from "path";
+import { uid } from "../func/uid";
 import { ServerErrors } from "../types";
 import { ConnectionRepository } from "./repositories/ConnectionRepository";
 import { GameRepository } from "./repositories/GameRepository";
 import { GameModel } from "../machine/GameMachine";
 import { publishMachine } from "./func/socket";
+import { resolve } from "path";
 
 const connections = new ConnectionRepository();
 const games = new GameRepository(connections);
-const fastify = Fastify({ logger: true });
 
+const fastify = Fastify({ logger: true });
 fastify.register(FastifyStatic, {
-  root: path.resolve("./public"),
+  root: resolve("./public"),
 });
 
 fastify.register(FastifyWebsocket);

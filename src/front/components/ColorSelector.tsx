@@ -12,7 +12,7 @@ const ColorSelector = ({ onSelect, players, colors }: ColorSelectorProps) => {
     <>
       <div className="players">
         {players.map((player) => (
-          <div className="player" key={player.id}>
+          <div key={player.id} className="player">
             {player.name}
             {player.color && <div className={discColorClass(player.color)} />}
           </div>
@@ -20,13 +20,11 @@ const ColorSelector = ({ onSelect, players, colors }: ColorSelectorProps) => {
       </div>
       <h3>Sélectionnez une couleur</h3>
       <div className="selector">
-        {colors.map((color) => {
-          return (
-            <button key={color} onClick={() => onSelect(color)}>
-              <div className={discColorClass(color)}></div>
-            </button>
-          );
-        })}
+        {colors.map((color) => (
+          <button key={color} onClick={() => onSelect(color)}>
+            <div className={discColorClass(color)}></div>
+          </button>
+        ))}
       </div>
     </>
   );

@@ -16,8 +16,7 @@ export class GameRepository {
       if (state.changed) {
         publishMachineToPlayers(state, this.connections,id)
       }
-    })
-    game.start()
+    }).start()
     this.games.set(id,game)
     return game
   }
