@@ -16,7 +16,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useMachine } from "@xstate/react";
 import { GameMachine, makeGame } from "../../machine/GameMachine";
 import { getSession, logout } from "../func/session";
 import ReconnectingWebSocket, { Message } from "reconnecting-websocket";
